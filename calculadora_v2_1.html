@@ -1,0 +1,601 @@
+<!--  Calculadora V2.1-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es" >
+	<head>
+		<meta http-equiv="content-type" content="text/html" charset="utf-8" />
+		<title>Coventia Calcular Seguro</title>
+		<link rel="StyleSheet" href="Estilos.css" />
+		<script src="https://kit.fontawesome.com/ab9e1de7fc.js" crossorigin="anonymous"></script>
+		<script src="https://kit.font-awesome.com/2c36e9b7b1.js"></script>
+	
+		<script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=4"></script>
+		
+
+	</head>
+	<body>
+		<div id="content-container" >
+			<div id="CalculadoraV2"  >
+				
+				<div id="CalculadoraV2Fondo"></div>
+				<h1 style="text-align: center"><img src="imagenes/Logo.svg"></h1>
+				<div id="div_titulo">
+					<a>Con la calculadora de Coventia podrás conocer <strong> el ahorro anual en tu seguro teniendo en cuenta la posible penalización</strong> que te pueda aplicar tu banco.</a><br> <br>
+					<a>Animate y <strong> calcula en menos de 30 segundos tu ahorro.</strong></a></div>
+				<div id="parte_1_1">
+					<table>
+						<tr>
+							<td>
+								<label for="capitalP">Capital Pendiente</label>&nbsp; &nbsp;<a class="tooltip"><i class="fas fa-info-circle"><span class="tooltiptext">¿Cuál es el capital pendiente de tu préstamo?</span></i></a><br>
+								<input class="input1" type="number" id="capitalP" onchange="document.getElementById('myRange').value=value" placeholder="€">
+								<div >
+									<input class="slidecontainer" type="range" min="0" max="200000" value="50" class="slider" id="myRange" onchange="document.getElementById('capitalP').value=value">
+								</div>
+							</td>
+						</tr>
+					</table>
+					</fieldset>
+				</div>
+
+
+
+				<div id="parte_1_2">
+					<table>
+						<tr>
+							<td>
+								<label>¿Qué pagas al año por tu seguro?</label>&nbsp; &nbsp;<a class="tooltip"><i class="fas fa-info-circle"><span class="tooltiptext">Con tu nuevo seguro de vida te ahorras un 30%</span></i></a><br>
+								<input class="input1" type="number" id="PrimaA" onchange="document.getElementById('myRange2').value=value" placeholder="€" />
+								<div >
+									<input  class="slidecontainer"  type="range" min="0" max="3000" value="50" class="slider" id="myRange2" onchange="document.getElementById('PrimaA').value=value">
+								</div>    
+							</td>
+						</tr>
+					</table>
+				</div>
+			
+				<div id="parte_2">
+					<table class="nombres">
+						<tr>
+							<td>
+								<label for="euribor">Euribor</label>&nbsp; &nbsp;<a class="tooltip2"><i class="fas fa-info-circle"><span class="tooltiptext">Euribor a un año. Consúltalo aquí</span></i></a><br><br>
+								<input  class="input2" type="number" id="euribor"  onchange="sumar(this.value);" placeholder="-0,501 %" />
+							</td>
+							<td>
+								<label class="centrado">+</label>
+							</td>
+							<td>
+								<label for="tipoIA">Diferencial</label>&nbsp; &nbsp;<a class="tooltip2"><i class="fas fa-info-circle"><span class="tooltiptext">El diferencial es el porcentaje fijo que se suma al Euribor a tu hipoteca</span></i></a><br><br>
+								<input class="input2"  type="number" id="tipoIA"  onchange="sumar(this.value);" placeholder="%"/>
+							</td>
+							<td>
+								<label class="centrado">+</label>
+							</td>
+							<td>
+								<label for="penalizacion">Penalización</label>&nbsp; &nbsp;<a class="tooltip2"><i class="fas fa-info-circle"><span class="tooltiptext">Es la penalizacion que te aplica tu banco sobre el tipo de interés por cancelar el seguro</span></i></a><br><br>
+								<input class="input2"  type="number" id="penalizacion"  onchange="sumar(this.value);" placeholder="%"/>
+							</td>
+
+							<td>
+								<label class="centrado">=</label>
+							</td>
+
+							<td>
+								<label >Total</label><br>
+								<a class="totala" id="spTotal"></a><a>%</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<a>Consúltalo </a><a id="consulta" href="https://www.euribordiario.es/historico_mensual.html"  target="_blank">aquí</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+
+				<div id="parte_3_1">
+					<table>
+						<tr>
+							<td>
+								<label for="tiempoP">¿Cuántos años te quedan de préstamo?</label><br>  <!-- &nbsp; &nbsp; -->
+								<input class="input1" type="number" id="tiempoP"/><br> 
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="parte_3_2">
+					<table>
+						<tr>
+							<td>
+								<label for="edad">Indica tu edad en años</label><br>
+								<input  class="input1" type="number" id="edad"/><br>
+							</td>
+						</tr>
+					</table>
+				</div>
+			
+				<div id="div_botton">
+					<button class="bcalcular"  type="button" onclick="recogerDatos()";>Calcular Seguro</button>
+				</div>
+
+				<div id="motrar">
+					<table class="tabla2">
+						<tr>
+							<td class="td">
+								<label for="AhorroTS">Ahorro en la prima seguro</label>&nbsp; &nbsp;<a class="tooltip2"><i class="fas fa-info-circle"><span class="tooltiptext">Desde coventia te garantizamos para siempre un ahorro del 30% sobre la prima del seguro de tu banco. </span></i></a><br>
+								<input class="input2" type="number" id="AhorroTS" disabled/>
+							</td>
+							<td  class="td">
+								<label for="interestotal" >Interés</label>&nbsp; &nbsp;<a class="tooltip2"><i class="fas fa-info-circle"><span class="tooltiptext">Es el incremento de la cuota de tu préstamo</span></i></a><br>
+								<input class="input2" type="number" id="interestotal" disabled/>
+							</td>
+							<td  class="td" >
+								<label for="pePres">Penalización</label>&nbsp; &nbsp;<a class="tooltip2"><i class="fas fa-info-circle"><span class="tooltiptext">Es la penalización del présamos que te aplica el banco</span></i></a><br>
+								<input class="input2" type="number" id="pePres" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td  colspan="3" >
+								<div id="resultado">
+									<label for="AhorroA">Resultado Anual</label>
+									<input  class="input1" type="number" id="AhorroA" disabled/>
+								</div>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td>
+								<label for="AhorroT" >Ahorro Total €:</label>
+								<input class="input2" type="number" id="AhorroT" disabled/>
+							</td>
+						</tr> -->
+					</table>
+				</div>
+				
+				<div id="pie_de_pagina"  >
+					<a>Los datos anteriormente expuestos son estimados, la empresa no se responsabiliza de los posibles errores que puedan contener.<br>
+					Coventia Protección ante el Futuro Agencia de Suscripción S.L. es un agencia de suscripción con sede en España que está inscrita y supervisada por la Dirección General de Seguros y Fondos de Pensiones con el Nº AS-0109 con N.I.F. B-01833367 y Domicilio social: Carretera del Balneario 61, 30600-Murcia.</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="calculo.js"></script>
+	<style type="text/css">
+	
+*{
+	text-decoration: none;
+}
+/* Only edit this if you know what you are doing! */
+body { margin: 0px; padding: 0px;
+	font-family: 'Basis Grotesque Pro';
+	font-style: normal;
+	overflow-x:hidden; 
+	
+}
+
+/* Only edit this if you know what you are doing! */
+img { position: absolute; display: block; margin: 0px; border: none; padding: 0px; }
+
+/* Only edit this if you know what you are doing! */
+div { position: absolute; }
+
+input::placeholder {
+	font-size: 24px;
+	color: grey;
+	text-align: right;
+	overflow: hidden;
+white-space: nowrap;
+	text-overflow: "";
+}
+
+
+
+input[type=number] {
+	padding:10px;
+	margin:10px 0; 
+  }
+
+#consulta{
+	color: white;
+}
+#consulta:hover{
+	color:#BE8F3B;
+}
+
+
+
+#content-container { display: block; position: relative; width: 866px;  margin-left: auto; margin-right: auto;  }
+
+#content-container > div{ position: relative; top:inherit; }
+#CalculadoraV2 {
+	top: 0px;
+	left: 0px;
+	width: 866px;
+	height: 1598px;
+}
+
+
+#CalculadoraV2Fondo {
+	top: 0px;
+	left: 0px;
+	width: 866px;
+	height: 1598px;
+	background:#E5E5E5;
+}
+
+#pie_de_pagina {
+	font-size: 15px;
+	top: 1500px;
+	left: 23px;
+	width: 822px;
+	height: 100px;
+	background:#E5E5E5;
+}
+
+
+#motrar {
+	display: flex;
+  	justify-content: center;
+  	align-items: initial;
+	padding: 45px;
+	top: 900px;
+	left: 43px;
+	width: 776px;
+	height:220px;
+	background:#103593;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	box-sizing: border-box;
+	border-radius:8px 8px 8px 8px;
+	color: #FFFFFF;
+}
+.td{
+	margin: 10px;
+	padding: 10px;
+}	 
+
+
+span{
+	padding: 15px;
+	background: dodgerblue;
+	color: white;
+	min-width: 50px;
+	text-align: center;
+
+}
+
+#div_botton {
+	/* IMPORTANTE */
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	/*IMPORTANTE  */
+	
+	top: 780px;
+	left: 311px;
+	width: 245px;
+	height: 74px;
+	
+}
+
+
+.bcalcular{
+	
+    width: 190px;
+    height: 48px;
+    padding: 8px 24px;
+    background-color: #103593;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.tooltip{
+	color: #103593;
+}
+.tooltip2{
+	color: #fff;
+	border: 1px #fff;
+	border-radius:8px 8px 8px 8px ;
+
+}
+
+.centrado {
+	font-size: 25px;
+	padding: 8px ;
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#parte_3_2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	top: 570px;
+	left: 473px;
+	width: 300px;
+	height: 198px;
+	background:#E5E5E5;
+}
+
+
+#parte_3_1 {
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+
+	top: 570px;
+	left: 103px;
+	width: 300px;
+	height: 198px;
+	background:#E5E5E5;
+}
+
+
+#parte_2 {
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	top: 400px;
+	left: 103px;
+	width: 659px;
+	height: 165px;
+	background:#103593;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	box-sizing: border-box;
+	border-radius:8px 8px 8px 8px;
+	color: #FFFFFF;
+}
+
+.SegundoContenido{
+	width: 100px;
+	left: 0px;
+	top: 40px;
+}
+
+.slidecontainer {
+
+	width: 320px;
+	height: 48px;
+	left: 2px;
+	top: 371px;
+}
+
+
+#parte_1_2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top:  190px;
+	left: 473px;
+	width:300px;
+	height: 198px;
+	background:#E5E5E5; 
+}
+
+
+#parte_1_1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 190px;
+	left: 103px;
+	width: 300px;
+	height: 198px;
+	background:#E5E5E5;
+}
+
+.PrimerContenido{
+	width: 270px;
+	height: 200px;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	box-sizing: border-box;
+	border-radius: 8px;
+}
+
+.slidecontainer{
+	width: 100%;  
+}
+
+
+
+#div_titulo {
+	font-size: 18px;
+	top: 80px;
+	left: 46px;
+	width: 774px;
+	height: 130px;
+	
+	background:#E5E5E5;
+}
+.input1{
+	
+	font-size: 24px;
+	width: 250px;
+	height: 48px;
+	align-items: center;
+	top: 59px;
+	background: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	box-sizing: border-box;
+	border-radius: 8px;
+
+
+}
+::placeholder{
+	visibility: inherit;
+}
+#labelp{
+	text-align: right;
+	font-size: 35px;
+	align-items: center;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	box-sizing: border-box;
+	border-radius:0px 8px 8px 0px;
+}
+
+.input1:focus{
+	border: 3px;
+	outline: 0 none;
+	
+}
+
+.input2{
+	text-align: right;
+	font-size: 24px;
+	width: 125px;
+	height: 48px;
+	align-items: center;
+	background: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.4);
+	box-sizing: border-box;
+	border-radius:8px 8px 8px 8px;
+
+}
+
+
+
+
+.input2:focus{
+	border: 3px;
+	outline: 0 none;
+	
+}
+
+.totala{
+	font-size: 24px
+}
+
+
+input[type=range]{
+
+	background: #E5E5E5;
+	height: 28px;
+	-webkit-appearance: none;
+	margin: 10px 0;
+	width: 250px;
+  }
+  input[type=range]:focus {
+	outline: none;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 10px;
+	cursor: pointer;
+	box-shadow: 1px 1px 1px #000000;
+	background: #103593;
+	border-radius: 5px;
+	border: 1px solid #000000;
+  }
+  input[type=range]::-webkit-slider-thumb {
+	box-shadow: 1px 1px 1px #000000;
+	border: 1px solid #000000;
+	height: 20px;
+	width: 20px;
+	border-radius: 30px;
+	background: #FFFFFF;
+	cursor: pointer;
+	-webkit-appearance: none;
+	margin-top: -6px;
+  }
+  input[type=range]:focus::-webkit-slider-runnable-track {
+	background: #103593;
+  }
+
+ /* Info */
+ .tooltip {
+	position: relative;
+	display: inline-block;
+	
+	
+  }
+  
+  .tooltip .tooltiptext {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	visibility: hidden;
+	width: 200px;
+	height: 35px;
+	background-color: #BE8F3B;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -100px;
+	opacity: 0;
+	transition: opacity 0.2s;
+	border-color: black;
+	border-width: 1px;
+  }
+  
+  .tooltip .tooltiptext::after {
+	  
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #BE8F3B transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+  }
+
+  /* info2 */
+  .tooltip2 {
+	position: relative;
+	display: inline-block;
+	
+  }
+  
+  .tooltip2 .tooltiptext {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	visibility: hidden;
+	width: 250px;
+	height: 35px;
+	background-color: #BE8F3B;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 15px;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -140px;
+	opacity: 0;
+	transition: opacity 0.2s;
+  }
+  
+  .tooltip2 .tooltiptext::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #BE8F3B transparent transparent transparent;
+  }
+  
+  .tooltip2:hover .tooltiptext {
+	visibility: visible;
+	opacity: 1;
+  }
+
+	
+	</style>
+</html>
